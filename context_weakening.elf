@@ -1,0 +1,18 @@
+%% Lemma A_1, Context Weakening, pg. 241.
+%% Status: 
+
+Lemma_A_1_1 : {K} k T' K' -> ({t} k t K -> k T' K') -> type.
+
+%mode Lemma_A_1_1 +X1 +X2 -X3.
+
+- : Lemma_A_1_1 T DT'K' ([x] [DTK] DT'K').
+
+%worlds () (Lemma_A_1_1 _ _ _).
+%total  {} (Lemma_A_1_1 _ _ _).
+
+Lemma_A_1_2 : upsilon E P T -> k T A -> type.
+%mode Lemma_A_1_2 +X1 -X2.
+
+%worlds () (Lemma_A_1_2 _ _).
+%total  {} (Lemma_A_1_2 _ _).
+

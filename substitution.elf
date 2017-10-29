@@ -1,0 +1,14 @@
+%% Lemma A_6 Substituion, pg. 242.
+%% Status: waiting
+
+%% substitution_k
+%%Lemma_A_6_1 : ak T K -> ({a} delta a K -> k (T' a) K') -> k (T' T) K -> type.
+%%%mode Lemma_A_6_1 +X1 +X2 -X3.
+%%%worlds () (Lemma_A_6_1 _ _ _).
+%%%total  {} (Lemma_A_6_1 _ _ _).
+
+%% substitution_ak
+%%Lemma_A_6_2 : ak T K -> ({a} delta a K -> ak (T' a) K') -> ak (T' T) K -> type.
+%%%mode Lemma_A_6_2 +X1 +X2 -X3.
+%%%worlds () (Lemma_A_6_2 _ _ _).
+%%%total  {} (Lemma_A_6_2 _ _ _).

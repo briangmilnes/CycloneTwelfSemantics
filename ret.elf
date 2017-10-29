@@ -1,0 +1,25 @@
+%% ret judgement, pg 65.
+
+ret : st -> type.
+
+ret_return    : ret (return E).
+
+ret_if        : ret (if E S1 S2)
+                 <- ret S1
+                 <- ret S2.
+
+ret_seq_left  : ret S
+               <- ret (seq S S').
+
+ret_seq_right : ret S
+               <- ret (seq S' S).
+
+%% Interesting that I don't need a Gamma x T here? 
+ret_let       : ret (let E ([x] S x))
+                 <- ({x} ret (S x)).
+
+ret_open      : ret (open E T ([x] S x))
+                 <- ({x} ret (S x)).
+
+ret_openstar  : ret (open E T ([x] S x))
+                 <- ({x} ret (S x)).

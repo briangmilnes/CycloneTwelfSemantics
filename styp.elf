@@ -1,0 +1,39 @@
+%% Static Semantics Statement Typing, pg 63.
+
+SS_3_1 : styp (e_s E) T
+         <- rtyp E T'.
+
+SS_3_2 : styp (return E) T
+         <- rtyp E T.
+
+SS_3_3 : styp (seq S1 S2) T
+         <- styp S1 T
+         <- styp S2 T.
+
+SS_3_4 : styp (while E S) T
+         <- rtyp E int
+         <- styp S T.
+
+SS_3_5 : styp (if E S1 S2) T
+         <- rtyp E int
+         <- styp S1 T
+         <- styp S2 T.
+
+SS_3_6 : styp (let E ([x] S x)) T
+         <- rtyp E T'
+         <- ({x} gamma x T' -> styp (S x) T).
+
+SS_3_7 : styp (open E T ([x] S x)) T
+         <- rtyp E (etype witnesschanges K ([a] T' a))
+         <- k T A
+         <- ({x} {a} delta a K
+             -> gamma x (T' a)
+             -> styp (S x) T).
+
+SS_3_8 : styp (openstar E T ([x] S x)) T
+         <- rtyp E (etype aliases K ([a] T' a))
+         <- k T A
+         <- ({x} {a} delta a K
+             -> gamma x (T' a)
+             -> styp (S x) T).
+

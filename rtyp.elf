@@ -1,0 +1,50 @@
+%% Right hand side typing, pg. 64.
+
+SR_3_1  : rtyp (p_e X P) T
+           <- gettype T' P T
+           <- gamma X T
+           <- k T' A.
+
+SR_3_2  : rtyp (star E) T
+           <- rtyp E T
+           <- k T A.
+
+SR_3_3  : rtyp (dot E zero_pe) T0
+           <- ltyp E (cross T0 _).
+
+SR_3_4  : rtyp (dot E one_pe) T1
+           <- rtyp E (cross _ T1).
+
+SR_3_5  : rtyp (i_e (i_i _)) int.
+
+SR_3_6  : rtyp (amp E) (ptype T)
+           <- rtyp E T.
+
+SR_3_7  : rtyp (pair E0 E1) (cross T0 T1)
+           <- rtyp E0 T0
+           <- rtyp E1 T1.
+
+SR_3_8  : rtyp (assign E1 E2) T
+           <- ltyp E1 T
+           <- ltyp E2 T
+           <- assgn T.
+
+SR_3_9  : rtyp (appl E1 E2) T
+           <- rtyp E1 (arrow T' T)
+           <- rtyp E2 T'.
+
+SR_3_10 : rtyp (call S) T
+          <- styp S T
+          <- ret S.
+
+SR_3_11 : rtyp (inst E T) (T' T)
+           <- ak T K
+           <- rtyp E (utype K T').
+
+%% NOTE am I using PHI as a variable correctly?
+
+SR_3_12 : rtyp (pack T' E (etype P K T)) (etype P K T).
+
+
+          
+          

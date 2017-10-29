@@ -1,0 +1,98 @@
+%% Formal Syntax, pg. 57.
+%% Status: defined, questionable on contexts.
+
+%% Kinding
+kappa : type.
+B : kappa.
+A : kappa.
+
+%% Can a module change its witness?
+phi            : type.
+witnesschanges : phi.
+aliases        : phi.
+
+%% Types
+tau   : type.
+int  : tau.
+cross : tau -> tau -> tau.
+arrow : tau -> tau -> tau.
+ptype : tau -> tau.
+%% Binding of kinds in a type is kappa -> tau.
+%% matches poplmark 1a.
+utype : kappa ->          (tau -> tau) -> tau.
+etype : phi   -> kappa -> (tau -> tau) -> tau.
+
+%% Path Element.
+%% For dot, zero left, one right.
+ipe : type.
+zero_pe : ipe.
+one_pe  : ipe.
+
+pe   : type.
+%% For unpacking.
+u    : pe.
+ipe_pe : ipe -> pe.
+
+path : type.
+nil  : path.
+cons : pe -> path -> path.
+
+%% Terms.
+
+st : type.
+e  : type.
+f  : type.
+
+%% integer constants in terms.
+%% nat
+nat  : type.
+zero : nat.
+s    : nat -> nat.
+i    : type.
+i_i  : nat -> i.
+
+%% st.
+e_s      : e   -> st.
+return   : e   -> st.
+seq      : st  -> st -> st.
+if       : e   -> st -> st -> st.
+while    : e   -> st -> st.
+let      : e -> (e -> st) -> st.
+%% Questionable if I'm really binding alpha and it should be (tau -> e -> st).
+open    : e -> tau -> (e -> st) -> st.
+openstar : e -> tau -> (e -> st) -> st.
+
+%% e.
+p_e    : e -> path -> e.
+
+i_e    : i -> e.
+f_e    : f -> e.
+amp    : e -> e.
+star   : e -> e.
+pair   : e -> e -> e.
+dot    : e -> ipe -> e.
+assign : e -> e -> e.
+appl   : e -> e -> e.
+call   : st -> e.
+inst   : e -> tau -> e.
+pack   : tau -> e -> tau -> e.
+
+%% F.
+dfun : tau -> tau -> (e -> st) -> f.
+ufun : kappa -> (tau -> f) -> f.
+
+%% Term
+term : type.
+term_st : st -> term.
+term_e  : e  -> term.
+term_f  : f  -> term.
+
+delta   : tau -> kappa -> type.
+gamma   : e -> tau -> type.
+upsilon : e -> path -> tau -> type.
+
+%% An abstract heap type to start.
+H : type.
+hdot : H.
+
+% C is not directly represented.

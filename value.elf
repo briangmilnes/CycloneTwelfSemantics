@@ -1,0 +1,19 @@
+%% Values, pg 57.
+
+value : e -> type.
+
+value_i    : value (i_e _).
+
+value_amp : value (amp (p_e E _))
+            <- gamma E _.
+
+value_dfun : value (f_e (dfun _ _ _)).
+
+value_ufun : value (f_e (ufun _ _)).
+
+value_pair : value (pair V0 V1)
+	      <- value V0
+	      <- value V1.
+
+value_pack : value (pack _ V _)
+	     <- value V.

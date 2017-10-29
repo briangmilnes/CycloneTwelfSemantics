@@ -1,0 +1,32 @@
+%% Kinding judgement, pg 63.
+%% Status: defined.
+
+k : tau -> kappa -> type.
+
+k_int        : k int B.
+
+k_B          : {AL : tau} k AL B 
+              <- delta AL B.
+
+k_ptype_var  : k (ptype AL) B
+               <- delta AL A.
+ 
+k_A_B        : k AL B
+               <- k AL A.
+
+k_cross      : k (cross T0 T1) A 
+               <- k T0 A 
+               <- k T1 A.
+
+k_arrow      : k (arrow T0 T1) A
+              <- k T0 A
+              <- k T1 A.	      
+
+k_ptype_tau  : k (ptype AL) B
+              <- k AL A.
+
+k_utype      :  k (utype K ([y] T y)) A
+              <- ({x} delta x K -> k (T x) A).
+
+k_etype    :  k (etype P K ([y] T y)) A
+              <- ({x} delta x K -> k (T x) A).

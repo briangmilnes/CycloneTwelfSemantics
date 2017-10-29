@@ -1,0 +1,6 @@
+%% Dynamic semantics general,  pg 57.
+
+%% Not sure how to represent heaps. Grossman does it via a variable to
+%% value partial mapping.
+
+%% I'll start with static semantics.

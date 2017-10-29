@@ -1,0 +1,26 @@
+%% assgn judgement, pg. 63.
+%% Status: unfinished.
+
+assgn: tau -> type.
+
+assgn_in     : assgn int.
+
+assgn_var    : {AL : tau} assgn AL
+              <- delta AL B.
+
+assgn_ptype  : assgn (ptype AL).
+ 
+assgn_cross  : assgn (cross T0 T1)
+               <- assgn T0
+               <- assgn T1.
+
+assgn_arrow  : assgn (arrow T0 T1)
+              <- assgn T0
+              <- assgn T1.
+
+assgn_utype  :  assgn (utype K ([y] T y))
+              <- ({x} delta x K -> assgn (T x)).
+
+assgn_etype    :  assgn (etype P K ([y] T y))
+              <- ({x} delta x K -> assgn (T x)).
+

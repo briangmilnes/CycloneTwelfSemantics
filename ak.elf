@@ -1,0 +1,10 @@
+%% AK judgement, pg. 63.
+%% Status: unfinished.
+
+ak: tau -> kappa -> type.
+
+ak_k : ak T K <- k T K.
+
+ak_A : ak AL A
+       <- delta AL A.
+

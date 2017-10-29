@@ -1,0 +1,11 @@
+%% WF page 63.
+
+%% NOTE Dan uses the same WF for multiple contexts.
+
+%% We need to assume that WFD (delta, variable typing) requires k A,
+%% and that WFU (upsilon, pathing) assumes k A.
+
+%% NOTE this is not really the assumption setup we want. We want a block also.
+%% Look in the popl mark 1a assum_var for the right style.
+assume_upsilon_k_A : upsilon X P T <- k T A.
+assume_gamma_k_A   : gamma X T <- k T A.
