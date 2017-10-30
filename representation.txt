@@ -1,0 +1,13 @@
+
+ This is a first attempt to represent Cyclone in ELF in the same way that Harper & Licata represented the STLC.
+
+ The goal is to make an adequate representation but there are four issues:
+
+ 1) Heap - the heap and locations must be represented.
+ 2) & x p - is a value, which is a location.
+ 3) upsilon - context of x p tau.
+ 4) let - let is used with a heap instead of HOAS.
+
+ The names are somewhat odd as I'm following the Coq names which have
+ more restrictions due to libraries.
+ 

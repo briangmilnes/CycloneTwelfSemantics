@@ -1,18 +1,21 @@
 %% Lemma A_1, Context Weakening, pg. 241.
 %% Status: 
 
-Lemma_A_1_1 : {K} k T' K' -> ({t} k t K -> k T' K') -> type.
+Lemma_A_1_1 : {K'} delta T K -> k T K -> ({T'} delta T' K' -> k T K) -> type.
 
-%mode Lemma_A_1_1 +X1 +X2 -X3.
+%mode Lemma_A_1_1 +K' +X1 +X2 -X3.
+- : Lemma_A_1_1 K' DTK KTK ([T'] [DT'K' : delta T' K'] KTK).
 
-- : Lemma_A_1_1 T DT'K' ([x] [DTK] DT'K').
+%% NOTE: proves without the block.
+%block A_1_1_block : some {K'} block {T' : tau} {dT'K' : delta T' K'}.
+%worlds (A_1_1_block) (Lemma_A_1_1 _ _ _ _).
+%total  {} (Lemma_A_1_1 _ _ _ _).
 
-%worlds () (Lemma_A_1_1 _ _ _).
-%total  {} (Lemma_A_1_1 _ _ _).
-
+%% This is an assumption really, if I'm in the context then I've checked that it kinds at A.
 Lemma_A_1_2 : upsilon E P T -> k T A -> type.
 %mode Lemma_A_1_2 +X1 -X2.
+%block A_1_2_block : some {T : tau} {P : path}
+                      block {E : e} {U : upsilon E P T} {K : k T A} {thm: Lemma_A_1_2 U K}.
 
-%worlds () (Lemma_A_1_2 _ _).
+%worlds (A_1_2_block) (Lemma_A_1_2 _ _).
 %total  {} (Lemma_A_1_2 _ _).
-

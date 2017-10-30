@@ -1,0 +1,38 @@
+%% Term Weakening, pg. 241.
+
+Lemma_A_2_1: upsilon X P T''
+              -> gettype T P' T'
+              -> ({Y} {P''} {T''} upsilon Y P'' T'' -> gettype T P' T')
+              -> type.
+
+%mode Lemma_A_2_1 +UXPT'' +GTP'T' -GTP'T'.
+
+- : Lemma_A_2_1 UPXPT'' GTP'T' ([Y][P''][T''][U : upsilon Y P'' T''] GTP'T').
+
+%block A_2_1_block : some {T''} block {Y : e} {P'' : path} {U : upsilon Y P'' T''}.
+%worlds (A_2_1_block) (Lemma_A_2_1 _ _ _).
+%total  {} (Lemma_A_2_1 _ _ _).
+
+Lemma_A_2_2: ltyp E T -> ({E'} {P'} {T'} {E''} {T''} upsilon E' P' T' -> gamma E'' T'' -> ltyp E T) -> type.
+%mode Lemma_A_2_2 +LET -UG.
+
+- : Lemma_A_2_2 LET
+               ([E'] [P'] [T'] [E''] [T''] [U: upsilon E' P' T'] [G: gamma E'' T''] LET).
+%worlds () (Lemma_A_2_2 _ _).
+%total  {} (Lemma_A_2_2 _ _).
+
+Lemma_A_2_3: rtyp E T -> ({E'} {P'} {T'} {E''} {T''} upsilon E' P' T' -> gamma E'' T'' -> rtyp E T) -> type.
+%mode Lemma_A_2_3 +LET -UG.
+
+- : Lemma_A_2_3 LET
+               ([E'] [P'] [T'] [E''] [T''] [U: upsilon E' P' T'] [G: gamma E'' T''] LET).
+%worlds () (Lemma_A_2_3 _ _).
+%total  {} (Lemma_A_2_3 _ _).
+
+Lemma_A_2_3: styp E T -> ({E'} {P'} {T'} {E''} {T''} upsilon E' P' T' -> gamma E'' T'' -> styp E T) -> type.
+%mode Lemma_A_2_3 +LET -UG.
+
+- : Lemma_A_2_3 LET
+               ([E'] [P'] [T'] [E''] [T''] [U: upsilon E' P' T'] [G: gamma E'' T''] LET).
+%worlds () (Lemma_A_2_3 _ _).
+%total  {} (Lemma_A_2_3 _ _).

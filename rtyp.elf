@@ -43,8 +43,16 @@ SR_3_11 : rtyp (inst E T) (T' T)
 
 %% NOTE am I using PHI as a variable correctly?
 
-SR_3_12 : rtyp (pack T' E (etype P K T)) (etype P K T).
+SR_3_12 : rtyp (pack T' E (etype P K T)) (etype P K T)
+           <- rtyp E (T T')
+           <- ak T' K
+           <- k (etype P K T) A.
 
+SR_3_13 : rtyp (f_e (dfun T T' ([x] S x))) (arrow T T')
+           <- ({x} ret (S x))
+           <- ({x} gamma x T -> styp (S x) T').
 
-          
+SR_3_14 : rtyp (f_e (ufun K ([alpha] F alpha))) (utype K ([alpha] (T alpha)))
+           <- ({alpha} delta alpha K
+                 -> rtyp (f_e (F alpha)) (T alpha)).
           
