@@ -1,0 +1,52 @@
+%% Dynamic semantics for statements, pg. 58.
+
+%% NOTE: I believe I can use length here to generate new unique locations
+%% as the heap is always carried along in this semantics. No GC.
+DS_3_1 : H ;s (let V S) -s-> H' ;s (S (l_e (loc I)))
+          <- value V
+          <- (append_heap H V H')
+          <- (length_heap H' I).
+
+DS_3_2 : H ;s (seq (e_s V) S) -s-> H ;s S
+         <- value V.
+
+DS_3_3 : H ;s (seq (return V) S) -s-> H ;s (return V)
+         <- value V.
+
+DS_3_4 : H ;s (if (i_e z) S1 S2) -s-> H ;s S2.
+
+DS_3_5 : H ;s (if (i_e I) S1 S2) -s-> H ;s S1
+          <- nat_neq I z.
+
+DS_3_6 : H ;s (while E S) -s-> H ;s (if E (seq S; (while E S)) (e_s (i_e z))).
+
+%% NOTE: TODO Dan does a useless type substitution here in the thesis and comments
+%% on it being unnecesary. Double check that it can't cause any issue.
+%% NOTE: TODO not sure that I've got the amp right in all cases of openstar. 
+
+DS_3_7 : H ;s (open     (pack T' V T) T ([x : e] S x)) -s-> H ;s (let V ([x : e] S x))
+          <- value V.
+
+DS_3_8 : H ;s (openstar (pack T' V T) T ([x : e] S x)) -s-> H ;s (let V ([x : e] S (amp x)))
+          <- value V.
+
+DS_3_9_1 : H ;s (e_s E) -s-> H' ;s (e_s E') 
+          <-  H ;e E -r-> H' ;e E'.
+
+DS_3_9_2 : H ;s (return E) -s-> H' ;s (return E')
+          <-  H ;e E -r-> H' ;e E'.
+
+DS_3_9_3 : H ;s (if E S1 S2) -s-> H' ;s (if E' S1 S2)
+          <-  H ;e E -r-> H' ;e E'.
+
+DS_3_9_4 : H ;s (let E S) -s-> H' ;s (let E' S)
+          <-  H ;e E -r-> H' ;e E'.
+
+DS_3_9_5 : H ;s (open E T S) -s-> H' ;s (open E' T S)
+          <-  H ;e E -r-> H' ;e E'.
+
+DS_3_10 :  H ;s (seq S S2) -s-> H' ;s S'
+          <- H ;s S -s-> H' ;s S'.
+
+DS_3_11 : H ;s (openstar E T S) -s-> H' ;s (openstar E' T S)
+           <-  H ;e E -r-> H' ;e E'.

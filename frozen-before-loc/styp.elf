@@ -23,7 +23,6 @@ SS_3_6 : styp (let E ([x] S x)) T
          <- rtyp E T'
          <- ({x} gamma x T' -> styp (S x) T).
 
-%% NOTE: TODO not sure that I've got the amp/ptype right in all cases of openstar.
 SS_3_7 : styp (open E T ([x] S x)) T
          <- rtyp E (etype witnesschanges K ([a] T' a))
          <- k T A
@@ -32,9 +31,9 @@ SS_3_7 : styp (open E T ([x] S x)) T
              -> styp (S x) T).
 
 SS_3_8 : styp (openstar E T ([x] S x)) T
-         <- ltyp E (etype aliases K ([a] T' a))
+         <- rtyp E (etype aliases K ([a] T' a))
          <- k T A
          <- ({x} {a} delta a K
-             -> gamma x (ptype (T' a))
+             -> gamma x (T' a)
              -> styp (S x) T).
 

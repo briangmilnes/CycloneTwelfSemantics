@@ -1,0 +1,6 @@
+%% Static Semantics General Typing, pg 63.
+
+styp : st -> tau -> type.
+ltyp : e -> tau -> type.
+rtyp : e -> tau -> type.
+

@@ -1,0 +1,18 @@
+%% left hand side static semantics, page 64.
+
+SL_3_1 : ltyp (p_e E P) T
+          <- upsilon E _ _
+          <- gettype _ P T
+          <- gamma E T'
+          <- k T' A.
+
+SL_3_2 : ltyp (star E) T
+          <- rtyp E (ptype T)
+          <- k T A.
+
+SL_3_3 : ltyp (dot E zero_pe) T0
+          <- ltyp E (cross T0 _).
+
+SL_3_4 : ltyp (dot E one_pe) T1
+          <- ltyp E (cross _ T1).
+

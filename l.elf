@@ -1,0 +1,14 @@
+%% Dynamic semantics for l expressions, pg. 58.
+
+%% NOTE: TODO does X need to be a loc? Yes and I have no idea if I need more judgement cases to evaluate it.
+%% I'll make it a loc to start and hope not.
+DL_3_1 : H ;e (dot (p_e (l_e L) P) I) -l-> H ;e (p_e (l_e L) P')
+          <- append_path P I P'.
+
+DL_3_2 : H ;e (star (amp (p_e X P) -l-> H ;e (p_e X P).
+
+DL_3_3 : H ;e (star E) -l-> H' ;e -l-> (star E')
+         <- H ;e E -r-> H' ; E'.
+
+DL_3_4 : H ;e (dot E I) -l-> H ;e (dot E' I)
+         <- H ;e E -r-> H' ; E'.

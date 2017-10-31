@@ -22,31 +22,23 @@ ptype : tau -> tau.
 utype : kappa ->          (tau -> tau) -> tau.
 etype : phi   -> kappa -> (tau -> tau) -> tau.
 
-%% NOTE TODO can I simplify this?
 %% Path Element.
-%% For dot of pair, zero left, one right.
+%% For dot, zero left, one right.
 ipe : type.
 zero_pe : ipe.
 one_pe  : ipe.
 
-%% For unpacking.
 pe   : type.
+%% For unpacking.
 u    : pe.
 ipe_pe : ipe -> pe.
 
-%% Paths for typing and heap operations.
 path : type.
-pdot  : path.
-pcons : pe -> path -> path.
-
-%% NOTE: TODO this must be split out into a file and defined.
-append_path : path -> pe -> path -> type.
-
-%% locations
-location : type.
-loc      : nat -> location.
+nil  : path.
+cons : pe -> path -> path.
 
 %% Terms.
+
 st : type.
 e  : type.
 f  : type.
@@ -58,11 +50,10 @@ seq      : st  -> st -> st.
 if       : e   -> st -> st -> st.
 while    : e   -> st -> st.
 let      : e -> (e -> st) -> st.
-open     : e -> tau -> (e -> st) -> st.
+open    : e -> tau -> (e -> st) -> st.
 openstar : e -> tau -> (e -> st) -> st.
 
 %% e.
-l_e    : location -> e.  
 p_e    : e -> path -> e.
 i_e    : nat -> e.
 f_e    : f -> e.
@@ -86,8 +77,8 @@ term_st : st -> term.
 term_e  : e  -> term.
 term_f  : f  -> term.
 
-%% NOTE: TODO auxiliary judgement for typing that I don't really know how to correctly use.
 delta   : tau -> kappa -> type.
 gamma   : e -> tau -> type.
+upsilon : e -> path -> tau -> type.
 
 % C is not directly represented.

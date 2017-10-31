@@ -1,0 +1,3 @@
+%% Heap weakening, pg. 241.
+
+%% NOTE as we still have only and abstract heap, I can't prove anything yet.

@@ -1,0 +1,64 @@
+%% Dynamic semantics for r expressions, pg. 58.
+
+DR_3_1 : H ;e (l_e L) -r-> H ;e V
+          <- get Hx P V
+          <- (find_in_heap L H Hx).
+
+DR_3_2 : H ;e (assign (p_e (l_e L) P) V) -r-> H' ;e V
+          <- set V' P V V''
+          <- replace_in_heap H L V H'.
+
+DR_3_3 : H ;e (star (amp (p_e (l_e L) P))) -r-> H ;e (p_e (l_e L) P).
+
+DR_3_4_left   : H ;e (dot (pair V0 V1) zero_pe) -r-> H ;e V0
+                 <- value V0
+                 <- value V1.
+
+DR_3_4_right : H ;e (dot (pair V0 V1) zero_pe) -r-> H ;e V1
+                 <- value V0
+                 <- value V1.
+
+DR_3_6 : H ;e (call (return V)) -r-> H ;e V
+          <- value V.
+
+%% NOTE: TODO DR_3_7
+
+DR_3_8 : H ;e (call S) -r-> H' ;e (call S')
+          <- H ;s S -s-> H' ;s S'.
+
+DR_3_9_amp :  H ;e (amp E) -r-> H' ;e (amp E')
+              <- H ;e E -l-> H' ;e E'.
+
+DR_3_9_assign :  H ;e (assign E E2) -r-> H' ;e (assign E' E2)
+                 <- H ;e E -l-> H' ;e E'.
+
+DR_3_10_star       :  H ;e (star E) -r-> H' ;e E'
+                      <- H ;e E -r-> H' ;e E'.
+
+DR_3_10_dot        :  H ;e (dot E I) -r-> H' ;e (dot E' I)
+                      <- H ;e E -r-> H' ;e E'.
+
+DR_3_10_assign_xp  :  H ;e (assign XP E) -r-> H' ;e (assign XP E')
+                      <- H ;e E -r-> H' ;e E'.
+
+%% NOTE: TODO useless runtime type instantiation.
+
+DR_3_10_inst       :  H ;e (inst E T) -r-> H' ;e E'
+                      <- H ;e E -r-> H' ;e E'.
+
+DR_3_10_pair_left  :  H ;e (pair E E2) -r-> H' ;e (pair E' E2)
+                      <- H ;e E -r-> H' ;e E'.
+
+DR_3_10_pair_right :  H ;e (pair V E) -r-> H' ;e (pair V E')
+                      <- H ;e E -r-> H' ;e E'
+                      <- value V.
+
+DR_3_10_appl_left  :  H ;e (appl E E2) -r-> H' ;e (appl E' E2)
+                      <- H ;e E -r-> H' ;e E'.
+
+DR_3_10_appl_right :  H ;e (appl V E) -r-> H' ;e (appl V V')
+                      <- H ;e E -r-> H' ;e E'.
+
+DR_3_10_pack       :  H ;e (pack T' E T) -r-> H' ;e (pack T' E' T)
+                      <-  H ;e E -r-> H' ;e E'.
+

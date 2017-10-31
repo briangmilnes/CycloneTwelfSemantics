@@ -4,7 +4,7 @@ value : e -> type.
 
 value_int  : value (i_e _).
 
-value_amp  : value (amp (p_e (l_e L) P))
+value_amp  : value (amp (p_e E _))
               <- gamma E _.
 
 value_dfun : value (f_e (dfun _ _ _)).

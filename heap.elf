@@ -1,0 +1,66 @@
+%% heaps, pg 57 with location changes.
+%% Ala Aydemir, tapl-chap 13, but with types changed to match the thesis.
+
+%% Dan uses H as his heap type but then uses it as a variable, so I'm not going to match that.
+
+heap : type.     
+hdot : heap.
+%% NOTE: When I cons I must check that I have a value e, will I need a block?
+hcons : e -> heap -> heap.
+
+length_heap : heap -> nat -> type.
+%mode length_heap +H -N.
+
+length_hdot : length_heap hdot z.
+
+length_hcons :
+   length_heap (hcons _ H') (s N)
+   <- length_heap H' N.
+
+%worlds () (length_heap _ _).
+%total H' (length_heap H' _).
+%unique length_heap +H -1N.
+
+find_in_heap : location -> heap -> e -> type.
+%mode find_in_heap +L +H -E.
+
+find_in_heap_yes :
+   find_in_heap (loc z) (hcons E _) E.
+   
+find_in_heap_no :
+   find_in_heap (loc (s N)) (hcons _ H') E
+   <- find_in_heap (loc N) H' E.
+
+%worlds () (find_in_heap _ _ _).
+%terminates H' (find_in_heap _ H' _).
+%unique find_in_heap +L +H -E.
+
+%% NOTE: how will I get a fresh location?
+
+replace_in_heap : heap -> location -> e -> heap -> type.
+%mode replace_in_heap +H1 +L +E -H2.
+
+replace_in_heap_yes :
+   replace_in_heap (hcons E1 H') (loc z) E2 (hcons E2 H').
+
+replace_in_heap_no :
+   replace_in_heap (hcons E1 H1) (loc (s N)) E2 (hcons E1 H')
+   <- replace_in_heap H1 (loc N) E2 H'.
+
+%worlds () (replace_in_heap _ _ _ _).
+%terminates H' (replace_in_heap H' _ _ _).
+%unique replace_in_heap +H1 +L +E -H2.
+
+append_heap : heap -> e -> heap -> type.
+%mode append_heap +H1 +E -H2.
+
+append_hdot :
+   append_heap hdot E (hcons E hdot).
+   
+append_hcons :
+   append_heap (hcons E1 H1) E2 (hcons E1 H')
+   <- append_heap H1 E2 H'.
+   
+%worlds () (append_heap _ _ _).
+%total H' (append_heap H' _ _).
+%unique append_heap +H1 +E -H2.

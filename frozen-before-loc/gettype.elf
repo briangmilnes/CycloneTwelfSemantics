@@ -4,21 +4,21 @@ gettype : tau -> path -> tau -> type.
 
 %% NOTE unusued assumptions, unused variables. Have to think this through.
 
-gettype_pdot : gettype T pdot T
+gettype_nil : gettype T nil T
               <- upsilon _ P _.
 
 %% NOTE Dan reverses the path in the Upsilon context. I'm going to try avoiding that.
 
-gettype_cross_left : gettype (cross T0 T1) (pcons (ipe_pe zero_pe) P') T
+gettype_cross_left : gettype (cross T0 T1) (cons (ipe_pe zero_pe) P') T
                       <- upsilon _ P _ 
-                      <- upsilon _ (pcons (ipe_pe zero_pe) P) _
+                      <- upsilon _ (cons (ipe_pe zero_pe) P) _
                       <- gettype T0 P' T.
 
-gettype_cross_right : gettype (cross T0 T1) (pcons (ipe_pe one_pe) P') T
-                      <- upsilon _ (pcons (ipe_pe one_pe) P) _
+gettype_cross_right : gettype (cross T0 T1) (cons (ipe_pe one_pe) P') T
+                      <- upsilon _ (cons (ipe_pe one_pe) P) _
                       <- gettype T0 P' T.
 
-gettype_etype       : gettype (etype aliases K ([alpha] T' alpha)) (pcons u P') T
+gettype_etype       : gettype (etype aliases K ([alpha] T' alpha)) (cons u P') T
                        <- upsilon _ P _
-                       <- upsilon _ (pcons u  P) T''
+                       <- upsilon _ (cons u  P) T''
                        <- gettype (T' T'') P' T.

@@ -1,0 +1,10 @@
+%% Type Safety, pg. 67.
+
+stuck : Sst -> type.
+
+%% NOTE: TODO how do I represent OR? Different constants? How do I represent not?
+
+TypeSafety : styp S T
+              -> ret S 
+              -> hdot ;s S -s->* (H' ;s S')
+              -> NOT suck (H' ;s S').

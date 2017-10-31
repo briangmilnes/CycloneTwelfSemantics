@@ -2,7 +2,5 @@
 
 %% NOTE Dan uses the same WF for multiple contexts.
 
-%% We need to assume that WFD (delta, variable typing) requires \Delta |- k A,
+%% We need to assume that WFD (delta, variable typing) requires \Delat |- k A,
 %% and that WFU (upsilon, pathing) assumes . |-k A.
-
-%% I may need WFH for heap.

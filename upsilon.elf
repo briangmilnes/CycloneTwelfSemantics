@@ -1,0 +1,5 @@
+%% Upsilon, pg. 57.
+
+%% NOTE: TODO abstract, will I need the full store semantics? I think so.
+
+upsilon : e -> path -> tau -> type.

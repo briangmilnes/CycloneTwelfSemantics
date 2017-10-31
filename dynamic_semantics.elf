@@ -1,6 +1,26 @@
 %% Dynamic semantics general,  pg 57.
 
-%% Not sure how to represent heaps. Grossman does it via a variable to
-%% value partial mapping.
+%% NOTE: Not sure how this will work with list heaps.
 
-%% I'll start with static semantics.
+%% Dan names his state P for some reason but I'm not going
+%% to follow that convention as he conflates H ; st and H ; e
+%% in the notation.
+
+Sst : type.
+;s : heap -> st -> Sst.
+%infix none 10 ;s.
+Est : type.
+;e : heap -> e  -> Est.
+%infix none 10 ;e.
+
+%% NOTE: TODO This may be a notational mistake in that I really want to use (e_s e) in the judgement constants and hence a single semi colon.
+
+-s-> : Sst -> Sst -> type.
+%infix none 9 -s->.
+-r-> : Est -> Est -> type.
+%infix none 9 -r->.
+-l-> : Est -> Est -> type.
+%infix none 9 -l->.
+
+%% This use of infix judgements produces semantics rules that read roughly
+%% like Dan's thesis.

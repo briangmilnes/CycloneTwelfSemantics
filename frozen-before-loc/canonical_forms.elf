@@ -1,0 +1,53 @@
+%% Cannonical Forms Theorems, pg 247.
+%% Status: completed
+
+eq   : e   -> e   -> type.
+eq_refl : eq V V. 
+
+Lemma_A_9_int : value V -> rtyp V int -> eq V (i_e _) -> type.
+%mode Lemma_A_9_int +D1 +D2 -D3.
+
+- : Lemma_A_9_int value_int SR_3_5 eq_refl.
+
+%worlds () (Lemma_A_9_int _ _ _).
+%total  (D) (Lemma_A_9_int _ D _).
+
+Lemma_A_9_pair : value V -> rtyp V (cross _ _) -> eq V (pair _ _) -> type.
+%mode Lemma_A_9_pair +D1 +D2 -D3.
+
+- : Lemma_A_9_pair (value_pair _ _) (SR_3_7 _ _) eq_refl.
+
+%worlds () (Lemma_A_9_pair _ _ _).
+%total  (D) (Lemma_A_9_pair _ D _).
+
+Lemma_A_9_dfun : value V -> rtyp V (arrow _ _) -> eq V (f_e (dfun _ _ _)) -> type.
+%mode Lemma_A_9_dfun +D1 +D2 -D3.
+
+- : Lemma_A_9_dfun value_dfun (SR_3_13 _ _) eq_refl.
+
+%worlds () (Lemma_A_9_dfun _ _ _).
+%total  (D) (Lemma_A_9_dfun _ D _).
+
+Lemma_A_9_amp : value V -> rtyp V (ptype _) -> eq V (amp _) -> type.
+%mode Lemma_A_9_amp +D1 +D2 -D3.
+
+- : Lemma_A_9_amp (value_amp _) (SR_3_6 _) eq_refl.
+
+%worlds () (Lemma_A_9_amp _ _ _).
+%total  (D) (Lemma_A_9_amp _ D _).
+
+Lemma_A_9_ufun : value V -> rtyp V (utype _ _) -> eq V (f_e (ufun _ _)) -> type.
+%mode Lemma_A_9_ufun +D1 +D2 -D3.
+
+- : Lemma_A_9_ufun (value_ufun) (SR_3_14 _) eq_refl.
+
+%worlds () (Lemma_A_9_ufun _ _ _).
+%total  (D) (Lemma_A_9_ufun _ D _).
+
+Lemma_A_9_pack : value V -> rtyp V (etype P K T') -> eq V (pack T'' V' (etype P K T')) -> type.
+%mode Lemma_A_9_pack +D1 +D2 -D3.
+
+- : Lemma_A_9_pack (value_pack _) (SR_3_12 _ _ _) eq_refl.
+%worlds () (Lemma_A_9_pack _ _ _).
+%total  (D) (Lemma_A_9_pack _ D _).
+

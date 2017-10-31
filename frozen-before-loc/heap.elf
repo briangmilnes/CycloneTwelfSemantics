@@ -1,0 +1,31 @@
+% NOTE: values only, how do I represent this?
+heap : type.     %name heap H.
+hdot : heap.
+heap_cons : e -> heap -> heap.
+
+length_heap : heap -> nat -> type.
+%mode length_heap +H -N.
+
+length_hdot : length_heap hdot z.
+
+length_heap_cons :
+   length_heap (heap_cons _ H) (s N)
+   <- length_heap H N.
+
+%worlds () (length_heap _ _).
+%total H (length_heap H _).
+%unique length_heap +H -1N.
+
+find_in_heap : label -> heap -> e -> type.
+%mode find_in_heap +L +H -E.
+
+find_in_heap_yes :
+   find_in_heap (lbl z) (heap_cons E _) E.
+   
+find_in_heap_no :
+   find_in_heap (lbl (s N)) (heap_cons _ H) E
+   <- find_in_heap (lbl N) H E.
+
+%worlds () (find_in_heap _ _ _).
+%terminates H (find_in_heap _ H _).
+%unique find_in_heap +L +H -1E.

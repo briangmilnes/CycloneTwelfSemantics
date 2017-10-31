@@ -1,0 +1,51 @@
+%% The get and set jugdements for dynamic semantics, pg. 60.
+%% These define type walking in the heap.
+
+get : e -> path -> e -> type.
+
+get_pdot : get V pdot V 
+            <- value V.
+
+get_pair_left : get (pair V0 V1) (pcons (ipe_pe zero_pe) P) V
+                 <- get V0 P V
+                 <- value V0
+                 <- value V1
+                 <- value V.
+
+get_pair_right : get (pair V0 V1) (pcons (ipe_pe zero_pe) P) V
+                 <- get V1 P V
+                 <- value V0
+                 <- value V1
+                 <- value V.
+
+get_pack : get (pack T' V1 T) (pcons u P) V
+            <- get V1 P V
+            <- value V1
+            <- value V.
+
+set : e -> path -> e -> e -> type.
+
+set_pdot : set V' pdot V V
+            <- value V'
+            <- value V.
+
+set_pair_left : set (pair V0 V1) (pcons (ipe_pe zero_pe) P) V (pair V' V1)
+                 <- set V0 P V V'
+                 <- value V0
+                 <- value V1
+                 <- value V
+                 <- value V'.
+
+set_pair_left : set (pair V0 V1) (pcons (ipe_pe zero_pe) P) V (pair V0 V')
+                 <- set V1 P V V'
+                 <- value V0
+                 <- value V1
+                 <- value V
+                 <- value V'.
+
+set_pack : set (pack T' V1 T) (pcons u P) V (pack T' V' T)
+            <- set V1 P V V'
+            <- value V0
+            <- value V1
+            <- value V
+            <- value V'.
